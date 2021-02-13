@@ -1,10 +1,7 @@
 <template>
   <div>
 
-    <div class="text-center">
-      <logo/>
-      <vuetify-logo/>
-    </div>
+    <v-file-input accept="video/*" @change="handleFile"></v-file-input>
 
     <div v-if="tricks">
       <p v-for="t in tricks">
@@ -26,6 +23,7 @@
 
 <script>
 import {mapState, mapActions, mapMutations} from 'vuex';
+import axios from "axios";
 
 export default {
   data: () => ({
@@ -52,6 +50,23 @@ export default {
         {trick: {name: this.trickName}}
       );
       this.trickName = "";
+    },
+    async handleFile(file) {
+      if(!file) return;
+
+      const form = new FormData();
+      form.append("video", file, file.name);
+
+      console.log('file  ', file);
+      console.log('form  ', form);
+      console.log('...form  ', ...form);
+
+      for (let key of form.entries()) {
+        console.log(key[0] + ', ' + key[1])
+      }
+
+      const result = await axios.post("http://localhost:5000/api/videos", form)
+      console.log('result: ', result);
     }
   }
   // async fetch() {

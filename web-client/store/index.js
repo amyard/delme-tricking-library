@@ -24,7 +24,6 @@ export const mutations = {
 export const actions = {
   async nuxtServerInit({commit, dispatch}) {
     const message = (await axios.get("http://localhost:5000/api/home")).data;
-    console.log('message:  ', message);
     commit("setMessage", message);
     await dispatch('tricks/fetchTricks');
   }
