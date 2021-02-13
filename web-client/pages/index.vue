@@ -1,41 +1,33 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <div class="text-center">
-        <logo/>
-        <vuetify-logo/>
-      </div>
+  <div>
 
-      <div v-if="tricks">
-        <p v-for="t in tricks">
-          {{ t.name }}
-        </p>
-      </div>
+    <div class="text-center">
+      <logo/>
+      <vuetify-logo/>
+    </div>
 
-      <div>
-        <v-text-field label="Tricking Name" v-model="trickName"></v-text-field>
-        <v-btn @click="saveTricks">Save Trick</v-btn>
-      </div>
+    <div v-if="tricks">
+      <p v-for="t in tricks">
+        {{ t.name }}
+      </p>
+    </div>
 
-      {{ message }}
-      <v-btn @click="reset">Reset Message</v-btn>
-      <v-btn @click="resetTricks">Reset Tricks</v-btn>
+    <div>
+      <v-text-field label="Tricking Name" v-model="trickName"></v-text-field>
+      <v-btn @click="saveTricks">Save Trick</v-btn>
+    </div>
 
-    </v-col>
-  </v-row>
+    {{ message }}
+    <v-btn @click="reset">Reset Message</v-btn>
+    <v-btn @click="resetTricks">Reset Tricks</v-btn>
+
+  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-import axios from 'axios';
 import {mapState, mapActions, mapMutations} from 'vuex';
 
 export default {
-  components: {
-    Logo,
-    VuetifyLogo
-  },
   data: () => ({
     trickName: ""
   }),
