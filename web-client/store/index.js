@@ -1,8 +1,4 @@
-﻿import axios from "axios";
-
-const initState = () => ({
-  message: "init"
-})
+﻿const initState = () => ({})
 
 export const state = initState;
 
@@ -11,10 +7,6 @@ export const state = initState;
 // actions is async methods
 
 export const mutations = {
-  setMessage(state, message) {
-    state.message = message;
-  },
-
   reset(state) {
     Object.assign(state, initState());
   }
@@ -23,8 +15,6 @@ export const mutations = {
 // nuxtServerInit - is working only once in SSR
 export const actions = {
   async nuxtServerInit({commit, dispatch}) {
-    const message = (await axios.get("http://localhost:5000/api/home")).data;
-    commit("setMessage", message);
     await dispatch('tricks/fetchTricks');
   }
 }

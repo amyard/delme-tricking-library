@@ -1,6 +1,4 @@
-﻿import axios from "axios";
-
-const initState = () => ({
+﻿const initState = () => ({
   tricks: []
 })
 
@@ -22,12 +20,13 @@ export const mutations = {
 
 export const actions = {
   async fetchTricks({commit}) {
-    const tricks = (await axios.get("http://localhost:5000/api/tricks")).data;
+    //const tricks = (await axios.get("http://localhost:5000/api/tricks")).data;
+    const tricks = await this.$axios.$get("http://localhost:5000/api/tricks");
     commit("setTricks", {tricks});
   },
 
   async createTricks({commit, dispatch}, {trick}) {
-    await axios.post("http://localhost:5000/api/tricks", trick);
+    await this.$axios.post("http://localhost:5000/api/tricks", trick);
     await dispatch('fetchTricks');
   }
 }

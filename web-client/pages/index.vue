@@ -14,8 +14,6 @@
       <v-btn @click="saveTricks">Save Trick</v-btn>
     </div>
 
-    {{ message }}
-    <v-btn @click="reset">Reset Message</v-btn>
     <v-btn @click="resetTricks">Reset Tricks</v-btn>
 
   </div>
@@ -30,17 +28,11 @@ export default {
     trickName: ""
   }),
   computed: {
-    ...mapState({
-      message: state => state.message
-    }),
     ...mapState('tricks', {
       tricks: state => state.tricks
     })
   },
   methods: {
-    ...mapMutations([
-      'reset'
-    ]),
     ...mapMutations('tricks', {
       resetTricks: 'reset'
     }),
@@ -57,26 +49,9 @@ export default {
       const form = new FormData();
       form.append("video", file, file.name);
 
-      console.log('file  ', file);
-      console.log('form  ', form);
-      console.log('...form  ', ...form);
-
-      for (let key of form.entries()) {
-        console.log(key[0] + ', ' + key[1])
-      }
-
       const result = await axios.post("http://localhost:5000/api/videos", form)
       console.log('result: ', result);
     }
   }
-  // async fetch() {
-  //   await this.$store.dispatch('fetchMessage');
-  // }
-  // asyncData(payload) {
-  //   return axios.get("http://localhost:5000/api/home")
-  //     .then(({data}) => {
-  //       return { message : data };
-  //     })
-  // }
 }
 </script>
