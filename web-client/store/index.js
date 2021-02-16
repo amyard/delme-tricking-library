@@ -14,5 +14,7 @@ export const mutations = {
 
 // nuxtServerInit - is working only once in SSR
 export const actions = {
-  async nuxtServerInit() {}
+  async nuxtServerInit({dispatch}) {
+    dispatch("tricks/fetchTricks");
+  }
 }

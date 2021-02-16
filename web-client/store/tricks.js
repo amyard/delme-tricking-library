@@ -4,6 +4,12 @@
 
 export const state = initState;
 
+export const getters = {
+  trickItems: state => state.tricks.map(x => ({
+    text: x.name,
+    value: x.id
+  }))
+}
 
 // mutations is sync method
 // actions is async methods
@@ -20,8 +26,10 @@ export const mutations = {
 
 export const actions = {
   async fetchTricks({commit}) {
-    //const tricks = (await axios.get("http://localhost:5000/api/tricks")).data;
-    const tricks = await this.$axios.$get("http://localhost:5000/api/tricks");
+    const tricks = await this.$axios.$get("/api/tricks");
     commit("setTricks", {tricks});
+  },
+  createTricks({state, commit, dispatch}, {form}) {
+    return this.$axios.$post("/api/tricks", form);
   }
 }

@@ -3,36 +3,21 @@
 const initState = () => ({
   uploadPromise: null,
   active: false,
-  type: "",
-  step: 1
+  component: null
 })
-
-
-
 
 export const state = initState;
 
 export const mutations = {
-  toggleActivity(state) {
-    state.active = !state.active
-    if(!state.active) {
-      Object.assign(state, initState());
-    }
-  },
-  setType(state, {type}) {
-    state.type = type
-    if(type == UPLOAD_TYPE.TRICK) {
-      state.step++;
-    } else if(type == UPLOAD_TYPE.SUBMISSION) {
-      state.step += 2;
-    }
+  activate(state, {component}) {
+    state.active = true;
+    state.component = component;
   },
   setTask(state, {uploadPromise}) {
     state.uploadPromise = uploadPromise
-    state.step++;
   },
-  incStep(state) {
-    state.step++;
+  hide(state){
+    state.active = false;
   },
   reset(state) {
     Object.assign(state, initState());
@@ -42,14 +27,18 @@ export const mutations = {
 export const actions = {
   startVideoUpload({commit, dispatch}, {form}) {
     const uploadPromise = this.$axios.$post("/api/videos", form);
+    console.log('form in startVideoUpload: ', form)
+    console.log('uploadPromise in startVideoUpload: ', uploadPromise)
     commit("setTask", {uploadPromise});
   },
-  async createTricks({state, commit, dispatch}, {trick, submission}) {
-    if(state.type === UPLOAD_TYPE.TRICK) {
-      const createdTrick = await this.$axios.$post("/api/tricks", trick);
-      submission.trickId = createdTrick.id;
+  async createSubmission({state, commit, dispatch}, {form}) {
+    if (!state.uploadPromise) {
+      console.log('the upload task is null');
+      return;
     }
 
-    await this.$axios.$post("/api/submissions", submission);
+    form.video = await state.uploadPromise;
+    await dispatch('submissions/createSubmission', {form}, {root: true});
+    commit('reset');
   }
 }
