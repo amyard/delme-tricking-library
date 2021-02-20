@@ -10,7 +10,7 @@ namespace TrickingLibrary.Data
         public DbSet<Trick> Tricks { get; set; }
         public DbSet<Submission> Submissions { get; set; }
         public DbSet<Difficulty> Difficulties { get; set; }
-        public DbSet<TrickRelationship> TrickRelationships { get; set; }
+        public DbSet<TrickRelationship> TrickRelationships { get; set; } 
         public DbSet<Category> Categories { get; set; }
         public DbSet<TrickCategory> TrickCategories { get; set; }
 
