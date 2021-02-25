@@ -7,6 +7,7 @@
 export const state = initState;
 
 export const getters = {
+  trickById: state => id => state.tricks.find(x => x.id === id),
   trickItems: state => state.tricks.map(x => ({
     text: x.name,
     value: x.id
@@ -43,9 +44,7 @@ export const actions = {
     const categories = await this.$axios.$get("/api/categories");
 
     console.log("tricks: ", tricks);
-    console.log("difficulties: ", difficulties);
-    console.log("categories: ", categories);
-    
+
     commit("setTricks", {tricks, difficulties, categories});
   },
   createTricks({state, commit, dispatch}, {form}) {
