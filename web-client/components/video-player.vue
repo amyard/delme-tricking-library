@@ -34,7 +34,7 @@ export default {
 <style lang="scss" scoped>
 
 .video-container {
-  width: 480px;
+  width: 100%;
   position: relative;
   display: flex;
 
