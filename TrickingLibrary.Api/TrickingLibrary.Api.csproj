@@ -5,10 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\TrickingLibrary.Data\TrickingLibrary.Data.csproj" />
       <ProjectReference Include="..\TrickingLibrary.Models\TrickingLibrary.Models.csproj" />
     </ItemGroup>

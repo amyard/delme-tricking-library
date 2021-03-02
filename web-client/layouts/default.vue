@@ -2,7 +2,8 @@
   <v-app dark>
 
     <v-app-bar dense app>
-      <v-toolbar-title>Tricking Library</v-toolbar-title>
+      <nuxt-link class="text-h5 text--primary" style="text-decoration: none;" to="/">Tricking Library</nuxt-link>
+
       <v-spacer></v-spacer>
 
       <content-creation-dialog></content-creation-dialog>
