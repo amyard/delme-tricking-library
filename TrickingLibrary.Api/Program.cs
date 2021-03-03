@@ -56,14 +56,16 @@ namespace TrickingLibrary.Api
                     {
                         TrickId = "back-flip",
                         Description = "Test description for submission max height",
-                        Video = "video1.mp4"
+                        Video = "video1.mp4",
+                        VideoProcessed = true
                     });
                     
                     ctx.Add(new Submission
                     {
                         TrickId = "back-flip",
                         Description = "Test description for submission min height",
-                        Video = "video2.mp4"
+                        Video = "video2.mp4",
+                        VideoProcessed = true
                     });
                     
                     ctx.SaveChanges();
